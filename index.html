@@ -7,12 +7,26 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script>
     const root = document.getElementById("root");
-    const span = React.createElement(
-      "span",
-      { id: "sexy-span", style: { color: "red" } },
-      "Hello I'm a span"
+    const h3 = React.createElement(
+      "h3",
+      {
+        id: "title",
+        onMouseEnter: () => console.log("mouse enter"),
+      },
+      "Hello I'm a h3"
     );
-    ReactDOM.render(span, root);
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("i'm clicked"),
+        style: {
+          backgroundColor: "tomato",
+        },
+      },
+      "Click Me"
+    );
+    const container = React.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root);
   </script>
 </html>
 
@@ -31,4 +45,19 @@ To put the created element in HTML body: ReactDOM.render(element, destination);
 For this, convention is to create a div#root as destination;
 Above method is the very basic type of ReactJS and it is never used;
 Key is that we don't need to work on HTML as much as before;
+-->
+
+<!-- 2.3 Event in React
+To render multiple elements, we can create additional element like div
+as container for multiple elements where we can put other elements as an array;
+const ctn = React.createElement("div", null, [span, button]);
+
+As a property of React-created element, we can add event listener function;
+const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("i'm clicked"),
+      },
+      "Click Me"
+    );
 -->
