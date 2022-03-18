@@ -8,24 +8,32 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    let counter = 0;
 
-    const countUp = () => {
-      counter += 1;
-      render();
+    const App = () => {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => setCounter(counter + 1);
+      return (
+        <div>
+          <h3>Total Clicks: {counter}</h3>
+          <button onClick={onClick}>Click Me</button>
+        </div>
+      );
     };
 
-    const render = () => ReactDOM.render(<Container />, root);
-
-    const Container = () => (
-      <div>
-        <h3>Total Clicks : {counter}</h3>
-        <button onClick={countUp}>Click</button>
-      </div>
-    );
-    render();
+    ReactDOM.render(<App />, root);
   </script>
 </html>
+
+<!-- 3.1 - 3.2 setState
+To trigger re-render without having to call the rendering function everytime,
+First, we create a React.useState(data, modifierFunction) variable;
+In the process of creating the variable, we can name the arguments as below:
+  
+const [data, modifier] = React.useState(initialDataValue);
+
+The modifier() function, when used, it will update the data and re-render the component;
+The convention is to name the modifier as setData (Data being variable name of the data);
+-->
 
 <!-- 2.1 Before React
 In order for ReactJS to work on your app, below 2 lines should be added to HTML;
