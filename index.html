@@ -11,7 +11,7 @@
 
     const App = () => {
       const [counter, setCounter] = React.useState(0);
-      const onClick = () => setCounter(counter + 1);
+      const onClick = () => setCounter((current) => current + 1);
       return (
         <div>
           <h3>Total Clicks: {counter}</h3>
@@ -24,15 +24,13 @@
   </script>
 </html>
 
-<!-- 3.1 - 3.2 setState
-To trigger re-render without having to call the rendering function everytime,
-First, we create a React.useState(data, modifierFunction) variable;
-In the process of creating the variable, we can name the arguments as below:
-  
-const [data, modifier] = React.useState(initialDataValue);
+<!-- 3.4 State Functions
+When we need to calculate the next State based on the current State,
+modifierFunction can take the current State as its argument;
+Thus, we can make a counter as below:
 
-The modifier() function, when used, it will update the data and re-render the component;
-The convention is to name the modifier as setData (Data being variable name of the data);
+const [counter, setCounter] = React.useState(0);
+const onClick = () => setCounter((current) => current + 1);      
 -->
 
 <!-- 2.1 Before React
@@ -95,4 +93,15 @@ State is basically where your data will be;
 To include a variable in React, we just put the varialbe in {};
 
 When you render multiple times, React will check the update and apply to the only element that changed;
+-->
+
+<!-- 3.1 - 3.2 setState
+To trigger re-render without having to call the rendering function everytime,
+First, we create a React.useState(data, modifierFunction) variable;
+In the process of creating the variable, we can name the arguments as below:
+  
+const [data, modifier] = React.useState(initialDataValue);
+
+The modifier(newValue) function, when used, it will update the data and re-render the component;
+The convention is to name the modifier as setData (Data being variable name of the data);
 -->
