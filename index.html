@@ -5,28 +5,29 @@
   </body>
   <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-  <script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
     const root = document.getElementById("root");
-    const h3 = React.createElement(
-      "h3",
-      {
-        id: "title",
-        onMouseEnter: () => console.log("mouse enter"),
-      },
-      "Hello I'm a h3"
+    const Title = () => (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        Hello I'm a title
+      </h3>
     );
-    const btn = React.createElement(
-      "button",
-      {
-        onClick: () => console.log("i'm clicked"),
-        style: {
-          backgroundColor: "tomato",
-        },
-      },
-      "Click Me"
+    const Button = () => (
+      <button
+        style={{ backgroundColor: "tomato" }}
+        onClick={() => console.log("i'm clicked")}
+      >
+        Click Me
+      </button>
     );
-    const container = React.createElement("div", null, [h3, btn]);
-    ReactDOM.render(container, root);
+    const Container = () => (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
 
@@ -60,4 +61,27 @@ const btn = React.createElement(
       },
       "Click Me"
     );
+-->
+
+<!-- 2.5 - 2.6 JSX
+JSX is a syntax extension for JS;
+Using JSX, we can create React-elements similar to HTML way;
+Because of JSX, developers never use previous methods of creating elements;
+JSX Method: const title = <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>Content</h3>
+
+The downside of JSX is that browsers cannot fully understand JSX;
+In order to make browsers understand, we need to use Babel to translate the code;
+
+To include elements into another element, the children elements must to a function;
+The functions can be included similar to HTML tags
+
+const Container = (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
+
+First letter of your own components should be Uppercase;
+It's because if it is in lowercase, React might mistake it for HTML tag;
 -->
