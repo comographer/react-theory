@@ -8,26 +8,22 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        Hello I'm a title
-      </h3>
-    );
-    const Button = () => (
-      <button
-        style={{ backgroundColor: "tomato" }}
-        onClick={() => console.log("i'm clicked")}
-      >
-        Click Me
-      </button>
-    );
+    let counter = 0;
+
+    const countUp = () => {
+      counter += 1;
+      render();
+    };
+
+    const render = () => ReactDOM.render(<Container />, root);
+
     const Container = () => (
       <div>
-        <Title />
-        <Button />
+        <h3>Total Clicks : {counter}</h3>
+        <button onClick={countUp}>Click</button>
       </div>
     );
-    ReactDOM.render(<Container />, root);
+    render();
   </script>
 </html>
 
@@ -84,4 +80,11 @@ const Container = (
 
 First letter of your own components should be Uppercase;
 It's because if it is in lowercase, React might mistake it for HTML tag;
+-->
+
+<!-- 3.0 Understanding State
+State is basically where your data will be;
+To include a variable in React, we just put the varialbe in {};
+
+When you render multiple times, React will check the update and apply to the only element that changed;
 -->
