@@ -3,22 +3,22 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ text, changeValue }) {
+    function Btn({ text, fontSize = 20 }) {
       console.log(`${text} was rendered`);
       return (
         <button
-          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            marginRight: "5px",
+            fontSize,
           }}
         >
           {text}
@@ -26,15 +26,16 @@
       );
     }
 
-    const MemorizedBtn = React.memo(Btn);
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
 
     function App() {
-      const [value, setValue] = React.useState("Save Changes");
-      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Btn text={value} changeValue={changeValue} />
-          <MemorizedBtn text="Continue" />
+          <Btn text="Save Changes" fontSize={50} />
+          <Btn text="Continue" />
         </div>
       );
     }
@@ -153,4 +154,18 @@ In case you don't want to re-render certain component, you can use React Memo;
 You simply make copy of a component using React.memo();
 const MemorizedBtn = React.memo(Btn);
 MemorizedBtn will copy the Btn component and will render only once;
+-->
+
+<!-- 4.2 Prop Types
+React Team provides prop-types.js which checks the prop type you are sending;
+It provides PropTypes object where we can define name and type of the props we are sending;
+Based on the this setup, React can warn us on the console when we send a wrong type of prop;
+
+Btn.propTypes = {
+  text: PropTypes.string,
+  fontSize: PropTypes.number,
+};
+
+We can also check if required prop is missing;
+It is also possible to set default prop value on the components arguments;
 -->
