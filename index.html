@@ -7,9 +7,11 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ text, big }) {
+    function Btn({ text, changeValue }) {
+      console.log(`${text} was rendered`);
       return (
         <button
+          onClick={changeValue}
           style={{
             backgroundColor: "tomato",
             color: "white",
@@ -17,7 +19,6 @@
             border: 0,
             borderRadius: 10,
             marginRight: "5px",
-            fontSize: big ? 22 : 16,
           }}
         >
           {text}
@@ -25,11 +26,15 @@
       );
     }
 
+    const MemorizedBtn = React.memo(Btn);
+
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <Btn text={value} changeValue={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
@@ -138,4 +143,14 @@ You can use these props objects in the children component thus making them more 
 
 You can set the whole props object as an argument: function Btn(props);
 However, if you don't have many props, you can use shortcut to take it out of the props object: function Btn({text});
+-->
+
+<!-- 4.1 Memo
+It is also possible to send funcitons as props;
+You can define the function in the parent component and send it to children component as a prop;
+
+In case you don't want to re-render certain component, you can use React Memo;
+You simply make copy of a component using React.memo();
+const MemorizedBtn = React.memo(Btn);
+MemorizedBtn will copy the Btn component and will render only once;
 -->
